@@ -7,9 +7,9 @@ import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DHCPRenewer extends Thread {
-    public ConcurrentHashMap<Integer, IPRenew> list;
-    public IpList ipList;
-    public Duration expiryTime;
+    private ConcurrentHashMap<Integer, IPRenew> list;
+    private IpList ipList;
+    private Duration expiryTime;
     private TimerTask repeatedTask = new TimerTask() {
         @Override
         public void run() {
@@ -19,7 +19,7 @@ public class DHCPRenewer extends Thread {
         }
     };
 
-    public DHCPRenewer(ConcurrentHashMap<Integer, IPRenew> list, IpList ipList, Duration expiryTime) {
+    DHCPRenewer(ConcurrentHashMap<Integer, IPRenew> list, IpList ipList, Duration expiryTime) {
         this.list = list;
         this.ipList = ipList;
         this.expiryTime = expiryTime;

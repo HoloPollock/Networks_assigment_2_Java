@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class IpList extends ArrayList<IP> {
-    public IpList() {
+    IpList() {
         super();
     }
 
-    public Optional<IPv4Address> getFirstUnused() {
+    Optional<IPv4Address> getFirstUnused() {
         for (IP ip : this) {
             if (!ip.ipInUse()) {
                 IPv4Address addr = ip.ip;
@@ -19,7 +19,7 @@ public class IpList extends ArrayList<IP> {
         return Optional.empty();
     }
 
-    public void dropUse(IPv4Address ip) {
+    void dropUse(IPv4Address ip) {
         for (IP i : this) {
             if (i.ip.equals(ip)) {
                 i.inUse.set(false);

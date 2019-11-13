@@ -38,7 +38,6 @@ public class DHCPDriver {
                     var runner = new DHCPRunner(socket, packet, iplist, net, checkedIn);
                     runner.start();
                 }
-
             }
 
 

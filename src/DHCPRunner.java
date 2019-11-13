@@ -12,13 +12,13 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DHCPRunner extends Thread {
-    public DatagramSocket socket;
-    public DatagramPacket packet;
-    public IpList list;
-    public IPAddress net;
-    public ConcurrentHashMap<Integer, IPRenew> renewHashMap;
+    private DatagramSocket socket;
+    private DatagramPacket packet;
+    private IpList list;
+    private IPAddress net;
+    private ConcurrentHashMap<Integer, IPRenew> renewHashMap;
 
-    public DHCPRunner(DatagramSocket socket, DatagramPacket packet, IpList list, IPAddress net, ConcurrentHashMap<Integer, IPRenew> renewHashMap) {
+    DHCPRunner(DatagramSocket socket, DatagramPacket packet, IpList list, IPAddress net, ConcurrentHashMap<Integer, IPRenew> renewHashMap) {
         this.socket = socket;
         this.packet = packet;
         this.list = list;
@@ -27,11 +27,11 @@ public class DHCPRunner extends Thread {
 
     }
 
-    public static void println(Object o) {
+    private static void println(Object o) {
         System.out.println(o.toString());
     }
 
-    public static void print(Object o) {
+    private static void print(Object o) {
         System.out.print(o.toString());
     }
 

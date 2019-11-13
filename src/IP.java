@@ -6,21 +6,21 @@ import inet.ipaddr.ipv4.IPv4Address;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class IP {
-    public IPv4Address ip;
-    public AtomicBoolean inUse;
+    IPv4Address ip;
+    AtomicBoolean inUse;
 
     public IP(String ip) throws AddressStringException {
         this.ip = (IPv4Address) new IPAddressString(ip).toAddress();
         this.inUse = new AtomicBoolean(false);
     }
 
-    public IP(IPAddress ip) {
+    IP(IPAddress ip) {
         this.ip = (IPv4Address) ip;
         this.inUse = new AtomicBoolean(false);
 
     }
 
-    public boolean ipInUse() {
+    boolean ipInUse() {
         return this.inUse.get();
     }
 

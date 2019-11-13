@@ -1,4 +1,6 @@
-public class ClientDriver {
+package DNS;
+
+public class DNSDriver {
     public static void main(String[] args) {
 
     }

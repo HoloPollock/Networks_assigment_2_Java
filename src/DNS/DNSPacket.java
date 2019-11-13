@@ -1,3 +1,5 @@
+package DNS;
+
 public class DNSPacket {
     String gatewayMac;
     String mac;

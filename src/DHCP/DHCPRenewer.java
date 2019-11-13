@@ -1,3 +1,5 @@
+package DHCP;
+
 import inet.ipaddr.ipv4.IPv4Address;
 
 import java.time.Duration;
@@ -8,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class DHCPRenewer extends Thread {
     private ConcurrentHashMap<Integer, IPRenew> list;
-    private IpList ipList;
+    private IPList ipList;
     private Duration expiryTime;
     private TimerTask repeatedTask = new TimerTask() {
         @Override
@@ -19,7 +21,7 @@ public class DHCPRenewer extends Thread {
         }
     };
 
-    DHCPRenewer(ConcurrentHashMap<Integer, IPRenew> list, IpList ipList, Duration expiryTime) {
+    DHCPRenewer(ConcurrentHashMap<Integer, IPRenew> list, IPList ipList, Duration expiryTime) {
         this.list = list;
         this.ipList = ipList;
         this.expiryTime = expiryTime;

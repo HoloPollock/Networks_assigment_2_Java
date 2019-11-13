@@ -1,3 +1,5 @@
+package DHCP;
+
 import com.google.gson.Gson;
 import inet.ipaddr.IPAddress;
 import inet.ipaddr.ipv4.IPv4Address;
@@ -14,11 +16,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class DHCPRunner extends Thread {
     private DatagramSocket socket;
     private DatagramPacket packet;
-    private IpList list;
+    private IPList list;
     private IPAddress net;
     private ConcurrentHashMap<Integer, IPRenew> renewHashMap;
 
-    DHCPRunner(DatagramSocket socket, DatagramPacket packet, IpList list, IPAddress net, ConcurrentHashMap<Integer, IPRenew> renewHashMap) {
+    DHCPRunner(DatagramSocket socket, DatagramPacket packet, IPList list, IPAddress net, ConcurrentHashMap<Integer, IPRenew> renewHashMap) {
         this.socket = socket;
         this.packet = packet;
         this.list = list;
@@ -56,7 +58,7 @@ public class DHCPRunner extends Thread {
                 println("kill me");
             }
         } catch (NoSuchObjectException e) {
-            String error = "No available IP";
+            String error = "No available DHCP.IP";
             byte[] buf = error.getBytes();
             packet = new DatagramPacket(buf, buf.length, address, port);
             try {

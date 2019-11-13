@@ -1,3 +1,5 @@
+package DHCP;
+
 import inet.ipaddr.AddressStringException;
 import inet.ipaddr.IPAddress;
 import inet.ipaddr.IPAddressString;
@@ -16,10 +18,10 @@ public class DHCPDriver {
         try {
             Duration expiry = Duration.ofSeconds(60);
             IPAddress net = new IPAddressString("192.168.1.0/24").toAddress();
-            IpList iplist =
+            IPList iplist =
                     StreamSupport.stream(net.getIterable().spliterator(), false)
                             .map(IP::new)
-                            .collect(Collectors.toCollection(IpList::new));
+                            .collect(Collectors.toCollection(IPList::new));
             System.out.println(iplist);
             ConcurrentHashMap<Integer, IPRenew> checkedIn = new ConcurrentHashMap<>();
             DHCPRenewer renewer = new DHCPRenewer(checkedIn, iplist, expiry);

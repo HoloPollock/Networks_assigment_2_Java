@@ -1,10 +1,12 @@
+package DHCP;
+
 import inet.ipaddr.ipv4.IPv4Address;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class IpList extends ArrayList<IP> {
-    IpList() {
+public class IPList extends ArrayList<IP> {
+    IPList() {
         super();
     }
 

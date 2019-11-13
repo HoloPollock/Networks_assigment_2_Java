@@ -1,3 +1,5 @@
+package DHCP;
+
 import inet.ipaddr.AddressStringException;
 import inet.ipaddr.IPAddress;
 import inet.ipaddr.IPAddressString;
@@ -26,7 +28,7 @@ public class IP {
 
     @Override
     public String toString() {
-        return "IP{" +
+        return "DHCP.IP{" +
                 "ip=" + ip +
                 ", inUse=" + inUse +
                 '}';

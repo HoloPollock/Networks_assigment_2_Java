@@ -1,3 +1,5 @@
+package DHCP;
+
 import inet.ipaddr.IPAddress;
 
 import java.time.Duration;
@@ -24,7 +26,7 @@ public class IPRenew {
 
     @Override
     public String toString() {
-        return "IPRenew{" +
+        return "DHCP.IPRenew{" +
                 "address=" + address +
                 ", timeRenewed=" + timeRenewed +
                 '}';

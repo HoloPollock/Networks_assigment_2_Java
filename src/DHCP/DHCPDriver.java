@@ -32,7 +32,8 @@ public class DHCPDriver {
                 byte[] buf = new byte[1024];
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
-                String message = new String(packet.getData());
+
+                String message = utils.Utils.responseToString(packet.getData());
                 if (message.contains("renew")) {
                     IPRenewer ipRenewer = new IPRenewer(checkedIn, packet.getPort());
                     ipRenewer.start();

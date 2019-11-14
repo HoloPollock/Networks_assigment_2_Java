@@ -38,7 +38,7 @@ never come
 In order to run the System in much be in a very specific File scheme as
 described below
 
-as well the `JUnit 5`, `Gson` and `inet.ipaddr` jars are needed links to those are
+as well the `Gson` and `inet.ipaddr` jars are needed links to those are
 found in the README.md and install according to your IDE
 ```
 src

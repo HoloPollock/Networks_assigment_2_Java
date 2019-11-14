@@ -79,7 +79,7 @@ public class ClientRunner extends Thread {
                 } else {
                     DNSIP ips = DNS(config.dnsPort, socketDNS, input);
                     ServerSocket socket = new ServerSocket(0);
-                    ClientPacket packet = new ClientPacket(ips.getIPv4(), config.gateway, socket.getLocalPort(), url);
+                    ClientPacket packet = new ClientPacket(ips.getIPv4(), config.gateway, socket.getLocalPort(), input);
                     System.out.println(packet);
                 }
             }

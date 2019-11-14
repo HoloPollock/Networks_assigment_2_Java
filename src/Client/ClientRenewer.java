@@ -11,7 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ClientRenewer extends Thread {
-    private String ip; // while this isnt used it exists and is used by the constructor as this Class should not be used unless string IP can be set
+    private String ip; // while this isn't used it exists and is used by the constructor as this Class should not be used unless string IP can be set
     private DatagramSocket socket;
     private Duration renew;
 

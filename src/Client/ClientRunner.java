@@ -64,7 +64,8 @@ public class ClientRunner extends Thread {
             ClientPacket packet = new ClientPacket(ips.getIPv4(), config.gateway, socket.getLocalPort(), url);
             System.out.println(packet);
 
-            while(true){}
+            while (true) {
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

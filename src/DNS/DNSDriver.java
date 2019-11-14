@@ -23,7 +23,6 @@ public class DNSDriver {
             byte[] buf = new byte[1024];
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
             socket.receive(packet);
-            System.out.println("damm");
             var runner = new DNSRunner(mappings, socket, packet);
             runner.start();
         }

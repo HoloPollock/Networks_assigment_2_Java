@@ -21,22 +21,12 @@ public class DNSRunner extends Thread {
         this.packet = packet;
     }
 
-
-    private static void println(Object o) {
-        System.out.println(o.toString());
-    }
-
-    private static void print(Object o) {
-        System.out.print(o.toString());
-    }
-
     @Override
     public void run() {
         Gson gson = new Gson();
         InetAddress address = packet.getAddress();
         int port = packet.getPort();
         String url = Utils.responseToString(packet.getData()).strip();
-        print(url);
         DNSIP ips = dnsMap.get(url);
         if (ips != null) {
             String message = gson.toJson(ips);
@@ -49,7 +39,7 @@ public class DNSRunner extends Thread {
                 System.exit(300);
             }
         } else {
-            println("no url");
+            System.out.println("no url");
         }
 
     }

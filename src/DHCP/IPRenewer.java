@@ -24,7 +24,7 @@ public class IPRenewer extends Thread {
         // add thing to not renew if no renew can be made;
         renewHashMap.get(port).renew();
         String message = "Renewed" + port;
-        byte[] buf =  message.getBytes();
+        byte[] buf = message.getBytes();
         DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
         try {
             socket.send(packet);

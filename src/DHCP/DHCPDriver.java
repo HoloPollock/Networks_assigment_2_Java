@@ -39,8 +39,7 @@ public class DHCPDriver {
                     ipRenewer.start();
                 } else if (message.contains("release")) {
                     System.out.println("relsesed");
-                }
-                else {
+                } else {
                     var runner = new DHCPRunner(socket, packet, iplist, net, checkedIn);
                     runner.start();
                 }

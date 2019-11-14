@@ -1,22 +1,21 @@
 package DNS;
 
+import com.google.gson.Gson;
+import models.DNSIP;
+import utils.Utils;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.HashMap;
 
-import models.DNSIP;
-import utils.Utils;
-import com.google.gson.Gson;
-
 public class DNSRunner extends Thread {
     HashMap<String, DNSIP> dnsMap;
     DatagramSocket socket;
     DatagramPacket packet;
 
-    public DNSRunner(HashMap<String, DNSIP> dnsMap, DatagramSocket socket, DatagramPacket packet )
-    {
+    public DNSRunner(HashMap<String, DNSIP> dnsMap, DatagramSocket socket, DatagramPacket packet) {
         this.dnsMap = dnsMap;
         this.socket = socket;
         this.packet = packet;
@@ -49,8 +48,7 @@ public class DNSRunner extends Thread {
                 e.printStackTrace();
                 System.exit(300);
             }
-        }
-        else {
+        } else {
             println("no url");
         }
 

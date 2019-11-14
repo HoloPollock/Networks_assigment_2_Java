@@ -15,8 +15,6 @@ public class DHCPRenewer extends Thread {
     private TimerTask repeatedTask = new TimerTask() {
         @Override
         public void run() {
-            list.forEach((key, value) -> System.out.print("{" + key + " " + value + "}"));
-            System.out.println();
             checkToDrop();
         }
     };

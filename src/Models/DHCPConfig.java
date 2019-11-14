@@ -8,13 +8,13 @@ import java.time.Duration;
 public class DHCPConfig {
     public String ip;
     public String gateway;
-    public String dnsPort;
+    public int dnsPort;
     public Duration lease;
 
     public DHCPConfig(IPAddress ip, IPv4Address gateway) {
         this.ip = ip.toString();
         this.gateway = gateway.toString();
-        this.dnsPort = "9090";
+        this.dnsPort = 9090;
         this.lease = Duration.ofSeconds(60);
     }
 

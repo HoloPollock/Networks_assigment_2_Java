@@ -35,9 +35,12 @@ public class DHCPDriver {
 
                 String message = utils.Utils.responseToString(packet.getData());
                 if (message.contains("renew")) {
-                    IPRenewer ipRenewer = new IPRenewer(checkedIn, packet.getPort());
+                    IPRenewer ipRenewer = new IPRenewer(socket, checkedIn, packet.getPort(), packet.getAddress());
                     ipRenewer.start();
-                } else {
+                } else if (message.contains("release")) {
+                    System.out.println("relsesed");
+                }
+                else {
                     var runner = new DHCPRunner(socket, packet, iplist, net, checkedIn);
                     runner.start();
                 }

@@ -7,7 +7,10 @@ import models.DNSIP;
 import utils.Utils;
 
 import java.io.IOException;
-import java.net.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.util.Scanner;
 
 public class ClientRunner extends Thread {
@@ -42,13 +45,11 @@ public class ClientRunner extends Thread {
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.next();
                 System.out.println(input);
-                if(input.contains("renew")) {
+                if (input.contains("renew")) {
                     renew(socketDHCP);
-                }
-                else if(input.contains("release")) {
+                } else if (input.contains("release")) {
                     release(socketDHCP);
-                }
-                else if(input.contains("get_ip")) {
+                } else if (input.contains("get_ip")) {
                     getIP(socketDHCP);
                 }
             }
@@ -107,8 +108,7 @@ public class ClientRunner extends Thread {
             renewer.setIp(null);
             String ack = Utils.responseToString(recPacket.getData()).strip();
             System.out.println(ack);
-        }
-        else {
+        } else {
             System.out.println("Can't release no IP exists");
             System.out.println("Call get_ip to get new ip");
         }
@@ -124,8 +124,7 @@ public class ClientRunner extends Thread {
             socketDHCP.receive(recPacket);
             String ack = Utils.responseToString(recPacket.getData()).strip();
             System.out.println(ack);
-        }
-        else {
+        } else {
             System.out.println("Can't renew no IP exists");
             System.out.println("Getting New IP");
             DHCPConfig config = DHCP(socketDHCP);
@@ -136,13 +135,12 @@ public class ClientRunner extends Thread {
     }
 
     private void getIP(DatagramSocket socketDHCP) throws IOException {
-        if(name == null) {
+        if (name == null) {
             DHCPConfig config = DHCP(socketDHCP);
             name = config.gateway;
             renewer.setIp(name);
             System.out.println("New Ip Assigned");
-        }
-        else {
+        } else {
             System.out.println("already have IP can't get new one");
         }
     }

@@ -1,13 +1,13 @@
 package models;
 
 public class ClientPacket {
-    String gatewayMac;
-    String mac;
-    String siteIp;
-    String Ip;
-    int dstPort;
-    int srcPort;
-    String appData;
+    private String gatewayMac;
+    private String mac;
+    private String siteIp;
+    private String Ip;
+    private int dstPort;
+    private int srcPort;
+    private String appData;
 
     public ClientPacket(String siteIp, String ip, int srcPort, String appData) {
         this.gatewayMac = "00:1b:21:36:61:13";

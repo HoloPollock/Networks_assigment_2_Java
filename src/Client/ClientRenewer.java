@@ -57,7 +57,7 @@ public class ClientRenewer extends Thread {
             DatagramPacket message = new DatagramPacket(bufRec, bufRec.length);
             socket.receive(message);
             String ack = Utils.responseToString(message.getData()).strip();
-            System.out.println(ack);
+//            System.out.println(ack);
         }
     }
 }

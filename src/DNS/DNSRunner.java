@@ -11,9 +11,9 @@ import java.net.InetAddress;
 import java.util.HashMap;
 
 public class DNSRunner extends Thread {
-    HashMap<String, DNSIP> dnsMap;
-    DatagramSocket socket;
-    DatagramPacket packet;
+    private HashMap<String, DNSIP> dnsMap;
+    private DatagramSocket socket;
+    private DatagramPacket packet;
 
     public DNSRunner(HashMap<String, DNSIP> dnsMap, DatagramSocket socket, DatagramPacket packet) {
         this.dnsMap = dnsMap;

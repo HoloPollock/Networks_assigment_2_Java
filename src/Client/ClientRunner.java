@@ -14,15 +14,27 @@ import java.net.ServerSocket;
 import java.util.Scanner;
 
 public class ClientRunner extends Thread {
-    String name;
-    String url;
-    ClientRenewer renewer;
+    private String name;
+    private String url;
+    private ClientRenewer renewer;
+    private boolean repl;
 
-    public ClientRunner(String url) {
+    public ClientRunner(String url, boolean repl) {
         this.url = url;
+        this.repl = repl;
     }
 
     public ClientRunner() {
+        repl = false;
+    }
+
+    public ClientRunner(String url) {
+        this.url = url;
+        repl = false;
+    }
+
+    public ClientRunner(boolean repl) {
+        this.repl = repl;
     }
 
     @Override
@@ -35,22 +47,40 @@ public class ClientRunner extends Thread {
             this.renewer = new ClientRenewer(name, socketDHCP, config.lease);
             this.renewer.setDaemon(true);
             this.renewer.start();
-            DNSIP ips = DNS(config.dnsPort, socketDNS);
-            ServerSocket socket = new ServerSocket(0);
-            ClientPacket packet = new ClientPacket(ips.getIPv4(), config.gateway, socket.getLocalPort(), url);
-            System.out.println(packet);
-            while (true) {
+            if(url != null && !repl) {
+                System.out.println(url);
+                DNSIP ips = DNS(config.dnsPort, socketDNS, url);
+                ServerSocket socket = new ServerSocket(0);
+                ClientPacket packet = new ClientPacket(ips.getIPv4(), config.gateway, socket.getLocalPort(), url);
+                System.out.println(packet);
+            } else if (!repl){
+                Scanner scanner = new Scanner(System.in);
+                System.out.println(Thread.currentThread().getId() + " Enter Url To Get > ");
+                String input = scanner.next();
+                System.out.println(input);
+                url = input.strip();
+                System.out.println(url);
+                DNSIP ips = DNS(config.dnsPort, socketDNS, url);
+                ServerSocket socket = new ServerSocket(0);
+                ClientPacket packet = new ClientPacket(ips.getIPv4(), config.gateway, socket.getLocalPort(), url);
+                System.out.println(packet);
+            }
+            while (repl) {
                 System.out.println(Thread.currentThread().getId() + " What do you want to do");
                 System.out.print("> ");
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.next();
-                System.out.println(input);
                 if (input.contains("renew")) {
                     renew(socketDHCP);
                 } else if (input.contains("release")) {
                     release(socketDHCP);
                 } else if (input.contains("get_ip")) {
                     getIP(socketDHCP);
+                } else {
+                    DNSIP ips = DNS(config.dnsPort, socketDNS, input);
+                    ServerSocket socket = new ServerSocket(0);
+                    ClientPacket packet = new ClientPacket(ips.getIPv4(), config.gateway, socket.getLocalPort(), url);
+                    System.out.println(packet);
                 }
             }
 
@@ -75,16 +105,10 @@ public class ClientRunner extends Thread {
         return config;
     }
 
-    private DNSIP DNS(int port, DatagramSocket socketDNS) throws IOException {
+    private DNSIP DNS(int port, DatagramSocket socketDNS, String url) throws IOException {
         Gson gson = new Gson();
         socketDNS.connect(InetAddress.getLocalHost(), port);
-        if (url == null) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println(Thread.currentThread().getId() + " Enter Url To Get > ");
-            String input = scanner.next();
-            System.out.println(input);
-            url = input.strip();
-        }
+
         byte[] buf = url.getBytes();
         DatagramPacket sendPacket = new DatagramPacket(buf, buf.length);
         socketDNS.send(sendPacket);

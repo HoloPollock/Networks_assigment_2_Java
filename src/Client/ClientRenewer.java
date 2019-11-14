@@ -32,6 +32,11 @@ public class ClientRenewer extends Thread {
         this.renew = renew;
     }
 
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+
     @Override
     public void run() {
         if (Thread.currentThread().isDaemon()) {
@@ -43,14 +48,16 @@ public class ClientRenewer extends Thread {
     }
 
     private void renew() throws IOException {
-        byte[] buf = "renew".getBytes();
-        DatagramPacket packet = new DatagramPacket(buf, buf.length, InetAddress.getLocalHost(), 7070);
-        socket.send(packet);
-        byte[] bufRec = new byte[512];
-        DatagramPacket message = new DatagramPacket(buf, buf.length);
-        // add a packet lost thing
-        socket.receive(message);
-        String ack = Utils.responseToString(message.getData()).strip();
-        System.out.println(ack);
+        System.out.println(ip);
+        if (ip != null) {
+            byte[] buf = "renew".getBytes();
+            DatagramPacket packet = new DatagramPacket(buf, buf.length, InetAddress.getLocalHost(), 7070);
+            socket.send(packet);
+            byte[] bufRec = new byte[512];
+            DatagramPacket message = new DatagramPacket(bufRec, bufRec.length);
+            socket.receive(message);
+            String ack = Utils.responseToString(message.getData()).strip();
+            System.out.println(ack);
+        }
     }
 }

@@ -23,7 +23,7 @@ public class IPRenewer extends Thread {
     public void run() {
         // add thing to not renew if no renew can be made;
         renewHashMap.get(port).renew();
-        String message = "Renewed" + port;
+        String message = "IP lease renewed" + port;
         byte[] buf = message.getBytes();
         DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
         try {

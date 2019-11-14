@@ -1,6 +1,6 @@
 package DHCP;
 
-import Models.DHCPConfig;
+import models.DHCPConfig;
 import com.google.gson.Gson;
 import inet.ipaddr.IPAddress;
 import inet.ipaddr.ipv4.IPv4Address;

@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 import inet.ipaddr.ipv4.IPv4Address;
 import inet.ipaddr.ipv6.IPv6Address;

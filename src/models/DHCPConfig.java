@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 import inet.ipaddr.IPAddress;
 import inet.ipaddr.ipv4.IPv4Address;
@@ -20,7 +20,7 @@ public class DHCPConfig {
 
     @Override
     public String toString() {
-        return "Models.DHCPConfig{" +
+        return "models.DHCPConfig{" +
                 "ip='" + ip + '\'' +
                 ", gateway='" + gateway + '\'' +
                 ", dnsPort='" + dnsPort + '\'' +

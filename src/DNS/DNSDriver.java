@@ -1,6 +1,6 @@
 package DNS;
 
-import Models.DNSIP;
+import models.DNSIP;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

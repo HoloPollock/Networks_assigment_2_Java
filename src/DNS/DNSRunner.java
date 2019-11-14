@@ -6,7 +6,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.HashMap;
 
-import Models.DNSIP;
+import models.DNSIP;
 import utils.Utils;
 import com.google.gson.Gson;
 

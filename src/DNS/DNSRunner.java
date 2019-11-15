@@ -26,8 +26,8 @@ public class DNSRunner extends Thread {
         Gson gson = new Gson();
         InetAddress address = packet.getAddress();
         int port = packet.getPort();
-        String url = Utils.responseToString(packet.getData()).strip();
-        DNSIP ips = dnsMap.get(url);
+        String url = Utils.responseToString(packet.getData()).strip(); // get url requested
+        DNSIP ips = dnsMap.get(url); // get mapping from url
         if (ips != null) {
             String message = gson.toJson(ips);
             byte[] buf = message.getBytes();
@@ -36,10 +36,17 @@ public class DNSRunner extends Thread {
                 socket.send(packet);
             } catch (IOException e) {
                 e.printStackTrace();
-                System.exit(300);
             }
         } else {
             System.out.println("no url");
+            String errorMessage = "url not in DNS server";
+            byte[] buf = errorMessage.getBytes();
+            DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
+            try {
+                socket.send(packet);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }

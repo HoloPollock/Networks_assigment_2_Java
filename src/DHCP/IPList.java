@@ -5,11 +5,19 @@ import inet.ipaddr.ipv4.IPv4Address;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * Effectively a type alias of ArrayList<IP> with some extra functionality
+ *
+ */
 public class IPList extends ArrayList<IP> {
     IPList() {
         super();
     }
 
+    /**
+     * @return Optional of Ip address to use as there may be none left
+     * get first IP available from list of IPs
+     */
     Optional<IPv4Address> getFirstUnused() {
         for (IP ip : this) {
             if (!ip.ipInUse()) {
@@ -21,6 +29,10 @@ public class IPList extends ArrayList<IP> {
         return Optional.empty();
     }
 
+    /**
+     * @param ip Ip to drop
+     * When the term drop is used it mean add back to bool to be used (Switch boolean to false)
+     */
     void dropUse(IPv4Address ip) {
         for (IP i : this) {
             if (i.ip.equals(ip)) {

@@ -8,8 +8,8 @@ import inet.ipaddr.ipv4.IPv4Address;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class IP {
-    IPv4Address ip;
-    AtomicBoolean inUse;
+    IPv4Address ip; //Ip Address
+    AtomicBoolean inUse; //if the Ip is being used
 
     public IP(String ip) throws AddressStringException {
         this.ip = (IPv4Address) new IPAddressString(ip).toAddress();

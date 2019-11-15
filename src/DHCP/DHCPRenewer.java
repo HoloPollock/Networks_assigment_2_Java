@@ -8,11 +8,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Class that checks for expired IP leases
+ */
 public class DHCPRenewer extends Thread {
-    private ConcurrentHashMap<Integer, IPRenew> list;
-    private IPList ipList;
-    private Duration expiryTime;
-    private TimerTask repeatedTask = new TimerTask() {
+    private ConcurrentHashMap<Integer, IPRenew> list; //list of in use IPs
+    private IPList ipList; //all Ips possibles
+    private Duration expiryTime; //time leases last
+    private TimerTask repeatedTask = new TimerTask() { //Task to run automatically
         @Override
         public void run() {
             checkToDrop();
@@ -29,18 +32,21 @@ public class DHCPRenewer extends Thread {
     public void run() {
         if (Thread.currentThread().isDaemon()) {
             Timer timer = new Timer("runner");
-            timer.scheduleAtFixedRate(repeatedTask, 0, 10000);
+            timer.scheduleAtFixedRate(repeatedTask, 0, 10000); // run task every 10 seconds
         } else {
             System.out.println("should be ran as daemon");
         }
     }
 
+    /**
+     * Funnction to check is a IP lease should be dropped
+     */
     private void checkToDrop() {
         ArrayList<Integer> list_to_drop = new ArrayList<>();
         for (var entry : list.entrySet()) {
             var renew = entry.getValue();
             var port = entry.getKey();
-            if (renew.IsExpired(expiryTime)) {
+            if (renew.IsExpired(expiryTime)) { //if expired drop
                 list_to_drop.add(port);
             }
         }
@@ -51,8 +57,8 @@ public class DHCPRenewer extends Thread {
     }
 
     private void drop(Integer drop) {
-        ipList.dropUse((IPv4Address) list.get(drop).address);
-        list.remove(drop);
+        ipList.dropUse((IPv4Address) list.get(drop).address); //but IP back in pool of possible IPs
+        list.remove(drop); //remove from list of IPS tp be checked
     }
 
 }

@@ -9,12 +9,15 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Class to release Ip back to be used
+ */
 public class DHCPReleser extends Thread {
-    IPList ips;
-    ConcurrentHashMap<Integer, IPRenew> renewList;
-    DatagramSocket socket;
-    private Integer port;
-    private InetAddress address;
+    IPList ips; // list of possible IP
+    ConcurrentHashMap<Integer, IPRenew> renewList; //list holding IP and there lease time with what port is using them
+    DatagramSocket socket; //socket to send info
+    private Integer port; //what port asked to released
+    private InetAddress address; //what address asked to be released
 
     public DHCPReleser(IPList ips, ConcurrentHashMap<Integer, IPRenew> renewList, DatagramSocket socket, Integer port, InetAddress address) {
         this.ips = ips;
@@ -26,15 +29,15 @@ public class DHCPReleser extends Thread {
 
     @Override
     public void run() {
-        IPAddress ipToDrop = renewList.get(port).address;
-        ips.dropUse((IPv4Address) ipToDrop);
-        renewList.remove(port);
+        IPAddress ipToDrop = renewList.get(port).address; //get Ip to drop
+        ips.dropUse((IPv4Address) ipToDrop); //dro Ip from in use
+        renewList.remove(port); //remove from list being checked for lease
         System.out.println(ipToDrop);
         System.out.println(ips);
         byte[] buf = "IP Released".getBytes();
         DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
         try {
-            socket.send(packet);
+            socket.send(packet); //send ack
         } catch (IOException e) {
             e.printStackTrace();
         }

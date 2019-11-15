@@ -14,6 +14,11 @@ public class IPRenew {
         this.timeRenewed = timeRenewed;
     }
 
+    /**
+     * @param time duration of expiry time
+     * @return if the IPs lease has expired
+     * checks to see if the time since last renew is greater than the expiry time from now
+     */
     boolean IsExpired(Duration time) {
         var temp = Duration.between(timeRenewed, Instant.now());
         var compareTo = temp.compareTo(time);

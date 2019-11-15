@@ -21,13 +21,12 @@ public class IPRenewer extends Thread {
 
     @Override
     public void run() {
-        // add thing to not renew if no renew can be made;
-        renewHashMap.get(port).renew();
+        renewHashMap.get(port).renew(); //renew address this is always possible and insured by the client
         String message = "IP lease renewed" + port;
         byte[] buf = message.getBytes();
         DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
         try {
-            socket.send(packet);
+            socket.send(packet); //send ack that renew happened
         } catch (IOException e) {
             e.printStackTrace();
         }

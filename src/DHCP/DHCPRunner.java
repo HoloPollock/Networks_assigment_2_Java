@@ -34,29 +34,25 @@ public class DHCPRunner extends Thread {
         System.out.println(o.toString());
     }
 
-    private static void print(Object o) {
-        System.out.print(o.toString());
-    }
-
     @Override
     public void run() {
         Gson gson = new Gson();
         InetAddress address = packet.getAddress();
         int port = packet.getPort();
         println("Handling DHCP Conn From: " + address);
-        Optional<IPv4Address> ipOptional = list.getFirstUnused();
+        Optional<IPv4Address> ipOptional = list.getFirstUnused(); //Gets Ip t use
         try {
             if (ipOptional.isPresent()) {
-                IPv4Address ip = ipOptional.get();
-                IPRenew renew = new IPRenew(ip, Instant.now());
+                IPv4Address ip = ipOptional.get(); //unwraps Optional
+                IPRenew renew = new IPRenew(ip, Instant.now()); //create a new object tl be added to list to check for expiry
                 renewHashMap.put(packet.getPort(), renew);
                 DHCPConfig dhcpConfig = new DHCPConfig(net, ip);
                 String json = gson.toJson(dhcpConfig);
                 byte[] buf = json.getBytes();
-                packet = new DatagramPacket(buf, buf.length, address, port);
+                packet = new DatagramPacket(buf, buf.length, address, port); //send info
                 socket.send(packet);
             } else {
-                println("kill me");
+                println("error");
             }
         } catch (NoSuchObjectException e) {
             String error = "No available DHCP.IP";

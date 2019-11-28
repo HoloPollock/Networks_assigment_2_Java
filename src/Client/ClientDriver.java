@@ -4,8 +4,9 @@ public class ClientDriver {
 
     public static void main(String[] args) {
 
-//        ClientRunner runner = new ClientRunner("www.cncf.io", false);
-        ClientRunner runner = new ClientRunner(true);
-        runner.start();
+        ClientRunner runner2 = new ClientRunner("www.cncf.io", true);
+//        ClientRunner runner = new ClientRunner("www.linuxfoundation.org",false);
+       runner2.start();
+//       runner.start();
     }
 }

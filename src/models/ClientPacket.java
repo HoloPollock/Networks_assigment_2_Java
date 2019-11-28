@@ -21,14 +21,7 @@ public class ClientPacket {
 
     @Override
     public String toString() {
-        return "ClientPacket{\n" +
-                "gatewayMac='" + gatewayMac + '\'' +
-                ",\n mac='" + mac + '\'' +
-                ",\n siteIp='" + siteIp + '\'' +
-                ",\n Ip='" + Ip + '\'' +
-                ",\n dstPort=" + dstPort +
-                ",\n srcPort=" + srcPort +
-                ",\n appData='" + appData + '\'' + "\n" +
-                '}';
+        return "|" + gatewayMac + '|' + mac + "|" + siteIp + "|" + Ip + "|" + dstPort + "|" + srcPort + "|" + appData + "|";
+
     }
 }
